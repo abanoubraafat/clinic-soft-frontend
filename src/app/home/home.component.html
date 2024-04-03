@@ -1,0 +1,95 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container-fluid ">
+    <div class="row m-md-3">
+        <div class="col-md-3 col-sm-6 btn" routerLink="/Availability">
+            <div class="widget-container">
+                <img src=".\assets\Icons\Dr.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">Add Dr. Availability</h3>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 btn" routerLink="/reservation">
+            <div class="widget-container">
+                <img src=".\assets\Icons\health-report-NoBg.gif" alt="no" class="img-fluid" width="200px"
+                    height="200px">
+                <h3 class="text-center">Add a Reservation</h3>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 btn" routerLink="/patient">
+            <div class="widget-container">
+                <img src=".\assets\Icons\patient.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">Add Patient</h3>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 btn" routerLink="/operation">
+            <div class="widget-container">
+                <img src=".\assets\Icons\operation.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">Add Operation</h3>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 btn" routerLink="/AvailabilityList">
+            <div class="widget-container">
+                <img src=".\assets\Icons\AllAvilablities.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">Dr. Availability</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 btn" routerLink="/reservation-list">
+            <div class="widget-container">
+                <img src=".\assets\Icons\waiting.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">All Reservations</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 btn" routerLink="/patientlist">
+            <div class="widget-container">
+                <img src=".\assets\Icons\allPatients.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">All Patients</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-sm-6 btn" routerLink="/operationlist">
+            <div class="widget-container">
+                <img src=".\assets\Icons\allOperations.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">All Operations</h3>
+            </div>
+
+        </div>
+
+        <div *ngIf="isadmin" class="col-md-3 col-sm-6 btn" routerLink="/expenses">
+            <div class="widget-container">
+                <img src=".\assets\Icons\expenses.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">Add Clinic Expenses</h3>
+            </div>
+        </div>
+        <div *ngIf="isadmin" class="col-md-3 col-sm-6 btn" routerLink="/receptionist">
+            <div class="widget-container">
+                <img src=".\assets\Icons\clinicNoBg.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">Add Receptionist</h3>
+            </div>
+        </div>
+        <div *ngIf="isadmin" class="col-md-3 col-sm-6 btn" routerLink="/expensesList">
+            <div class="widget-container">
+                <img src=".\assets\Icons\allExpenses.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">All Clinic Expenses</h3>
+            </div>
+        </div>
+        <div *ngIf="isadmin" class="col-md-3 col-sm-6 btn" routerLink="/receptionist-list">
+            <div class="widget-container">
+                <img src=".\assets\Icons\AllReceptionists.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">All Receptionist</h3>
+            </div>
+        </div>
+        <div *ngIf="isadmin" class="col-md-3 col-sm-6 btn" routerLink="/costs">
+            <div class="widget-container">
+                <img src=".\assets\Icons\profit.gif" alt="no" class="img-fluid" width="200px" height="200px">
+                <h3 class="text-center">Clinic Profit</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Bootstrap JS and jQuery for functionality if needed -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

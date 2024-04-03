@@ -1,0 +1,7 @@
+<div class="btn-toolbar d-inline-block" role="toolbar">
+  <div class="btn-group me-2" role="group">
+    <button type="button" class="btn btn-secondary" [class.disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)" aria-hidden="true" aria-label="Previous">&laquo;</button>
+    <button type="button" class="btn btn-secondary" *ngFor="let page of pages" [class.active]="currentPage === page" (click)="goToPage(page)">{{ page }}</button>
+    <button type="button" class="btn btn-secondary"[class.disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)" aria-hidden="true" aria-label="Next">&raquo;</button>
+  </div>
+</div>

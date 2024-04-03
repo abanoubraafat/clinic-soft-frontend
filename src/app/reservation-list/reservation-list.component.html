@@ -1,0 +1,86 @@
+@if (loading) {
+    <div class="spinner-container text-center w-100">
+        <app-spinner></app-spinner>
+    </div>
+}
+@else
+ {
+    <div class="alert-container">
+        <app-success *ngIf="isDeleted" [title]="'Reservation'" [status]="'Deleted'"></app-success>
+    </div>
+    <app-page-title [spanText]="'All'" [headerText]="'Reservations'" [image]="'waiting.gif'"></app-page-title>
+    <div class="container">
+        <div class="text-center mb-3">
+            @if(currentDate == today){
+                <h6>{{displayedReservationWord}} of today are : {{reservations.length}}</h6>
+            }
+            @else{
+                <h6>{{displayedReservationWord}} of {{currentDate}} are : {{reservations.length}}</h6>
+            }
+        </div>
+        <div class="form-row">
+            
+                <div class="form-group col-md-5 mx-5">
+                    <label for="datePicker">Filter By Date:</label>
+                    <input type="date" id="datePicker" class="form-control" [(ngModel)] = "currentDate" (change)="changeReservationDay($event)">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="resType">Filter By Type:</label>
+                    <select id="resType" class="form-select" [(ngModel)]="type" (change)="filterByType($event)">
+                        <option>--Select Type--</option>
+                        <option>New</option>
+                        <option>Consult</option>
+                    </select>
+                </div>
+        </div>
+        @if(reservations.length == 0)
+        {
+            <div>
+                <h1 class="text-center my-5">No Reservations for this date ♥</h1>
+            </div>
+        }
+        @else {
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Type</th>
+                    <th>Day</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Cost</th>
+                    <th>Patient Name</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (reservation of displayedItems; track reservation.Id) {
+                    <tr>
+                        <td>{{reservation.reservationNo}}</td>
+                        <td>{{reservation.type}}</td>
+                        <td>{{reservation.day}}</td>
+                        <td>{{reservation.fromTime}}</td>
+                        <td>{{reservation.toTime}}</td>
+                        <td>{{reservation.cost}}</td>
+                        <td><a routerLink="/patient/{{reservation.patientId}}">{{reservation.patientName}} / {{reservation.patientId}}</a></td> 
+                        <td>
+                            <button class="btn" (click)="editReservation(reservation.id)" (mouseover)="changeColorEdit($event)" (mouseout)="returnColor($event)" title="Edit Reservation"><i class="fa-regular fa-pen-to-square"></i></button>|
+                            <button class="btn" (click)="showConfirmation(reservation.id)" (mouseover)="changeColorDelete($event)" (mouseout)="returnColor($event)" title="Delete Reservation"><i class="fa-solid fa-trash"></i></button>
+                            <app-confirm *ngIf="showConfirmationDialog" (confirmed)="deleteReservation()" (cancelled)="cancelDelete()"></app-confirm>
+                        </td>
+                    </tr>
+                }    
+            </tbody>
+        </table>
+    }
+    </div>
+}
+<div class="my-3 text-center">
+    <a class="btn-main btn-round-full  w-25" routerLink="/reservation">Add Reservation</a>
+</div>
+@if(!loading && reservations.length != 0){
+    <div class="text-center my-3 w-100">
+        <app-pagination [items]="reservations" (pageChange)="onPageChange($event)"></app-pagination>
+    </div>
+}
+

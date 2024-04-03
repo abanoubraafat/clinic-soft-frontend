@@ -1,0 +1,78 @@
+@if(loading){
+  <div class="spinner-container text-center w-100">
+    <app-spinner></app-spinner>
+  </div>
+}
+@else {
+  <div class="alert-container">
+    <app-success *ngIf="isSaved" [title]="'Reservation'" [status]="'Edited'"></app-success>
+  </div>
+  <app-page-title [spanText]="'Edit A'" [headerText]="'Reservation'"  class="appoinment-form"></app-page-title>
+  <img src=".\assets\Icons\health-report.gif" alt="no" class="img-fluid mr-5" width="400px" height="400px" style="float: right;">
+  <div class="container">
+    <form [formGroup]="form" class="appoinment-form">
+      <div class="mb-3 col-md-6">
+        <label for="select" class="col-form-label">Type:</label>
+        <select class="form-control form-select" id="select" required formControlName="type">
+          <option value="" disabled selected>--Select Reservation Type--</option>
+          <option value="New">New Reservation</option>
+          <option value="Consult">Consult</option>
+        </select>
+        @if(!getTypeValid() && reservation != null && form.enabled){
+        <p class="text-danger">Type isn't valid</p>
+        }
+      </div>
+      <div class="mb-3 col-md-6">
+        <label for="addReservationDate col-form-label">Date:</label>
+        <input type="date" id="addReservationDate" class="form-control" formControlName="day">
+        @if(!getDayValid() && reservation != null && form.enabled){
+        <p class="text-danger">Date isn't valid</p>
+        }
+      </div>
+      <div class="mb-3 col-md-6">
+        @if ((availability == null || !isValidReservationTimeForDr) && form.enabled) {
+          <p class="text-danger">Dr isn't available this day</p>
+        }
+        @else {
+          <p>Dr. is available from: {{availability.fromTime}} To: {{availability.toTime}} this day.</p>
+          @if (this.form.controls['type'].valid) {
+            <p>Your Appointement Will be From: {{patientFromTime}} To: {{patientToTime}} </p>
+          }
+          @if(isOldDay){
+            <p class="text-danger">BE CAREFULL you are adding a reservation to an old date!!</p>
+          }
+        }
+      </div>
+      <div class="mb-3 col-md-6">
+        <label for="DataList" class="form-label">Please select a patient:</label>
+        <input class="form-select form-control" list="datalistOptions" id="DataList" placeholder="Type to search..." required
+          formControlName="patient" autocomplete="off">
+        <datalist id="datalistOptions">
+          @for (p of patients; track p.patientId) {
+            <option value="{{p.fname}} {{p.lname}} / {{p.patientId}}">
+            }
+        </datalist>
+        <br>
+        @if(!getPatientValid() && reservation != null  && form.enabled){
+        <p class="text-danger">Patient doesn't exist!</p>
+        }
+        @if(alreadyReserved && form.controls['patient'].touched && form.enabled){
+          <p class="text-danger">Patient Already has a reservation this day!</p>
+        }
+        <button class="btn-main btn-round-full" (click)="redirectToAddPatient()">Add Patient</button>
+      </div>
+      <div class="mb-3 col-md-6">
+        <label for="cost" class="col-form-label">Cost:</label>
+        <input type="number" class="form-control" id="cost" min="0" required formControlName="cost">
+        @if(!getCostValid() && reservation != null  && form.enabled){
+        <p class="text-danger">Cost isn't valid</p>
+        }
+      </div>
+    </form>
+  </div>
+  <div class="mb-5 text-center">
+    <button type="submit" class="btn-main btn-round-full w-25" (click)="save()" [disabled]="form.invalid||availability == null || form.disabled || alreadyReserved">Save Reservation</button>
+  </div>
+  
+  }
+

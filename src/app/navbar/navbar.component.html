@@ -1,0 +1,71 @@
+<div class="nav-div">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-5">
+        <div class="container-fluid ">
+            <a class="navbar-brand" href="#">
+                <img src="./assets/logo/logo.png" alt="" width="70px" height="70px">
+            </a>
+            <div>
+                <span class="navbar-text">We Care</span>
+                <span class="navbar-text">About You ❤</span>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <ul class="navbar-nav mb-2 mx-auto mb-lg-0">
+                    <li *ngIf="isLogin" class="nav-item">
+                        <a class="nav-link " aria-current="page" routerLinkActive="active" routerLink="/home"
+                            style="margin-left: 100px !important;">Home</a>
+                    </li>
+                    <li *ngIf="isLogin" class="nav-item">
+                        <a class="nav-link " aria-current="page" routerLinkActive="active"
+                            routerLink="/reservation-list">Reservations
+                        </a>
+                    </li>
+                    <li *ngIf="isLogin" class="nav-item">
+                        <a class="nav-link " aria-current="page" routerLinkActive="active"
+                            routerLink="/operationlist">Operations</a>
+                    </li>
+
+                    <li *ngIf="isLogin" class="nav-item">
+                        <a class="nav-link " aria-current="page" routerLinkActive="active"
+                            routerLink="/patientlist">Patients</a>
+                    </li>
+                    <li *ngIf="!isLogin" class="nav-item">
+                        <a class="nav-link " aria-current="page" routerLinkActive="active" routerLink="/Login">login</a>
+                    </li>
+                    <!-- <li *ngIf="isLogin" class="nav-item">
+                        <a class="nav-link " aria-current="page" routerLinkActive="active"
+                            routerLink="/Availability">Availability</a>
+                    </li> -->
+                    <li *ngIf="isLogin" class="nav-item">
+                        <a class="nav-link " aria-current="page" routerLinkActive="active"
+                            routerLink="/AvailabilityList">Availability</a>
+                    </li>
+                    <!-- <li *ngIf="isLogin && isadmin" class="nav-item">
+                        <a class="nav-link " aria-current="page" routerLinkActive="active"
+                            routerLink="/expenses">Expenses</a>
+                    </li> -->
+                    <li *ngIf="isLogin && isadmin" class="nav-item">
+                        <a class="nav-link " aria-current="page" routerLinkActive="active"
+                            routerLink="/receptionist-list">Receptionists</a>
+                    </li>
+                    <li *ngIf="isLogin && isadmin" class="nav-item">
+                        <a class="nav-link " aria-current="page" routerLinkActive="active"
+                            routerLink="/expensesList">Expenses</a>
+                    </li>
+                    <li *ngIf="isLogin" class="nav-item">
+                        <a (click)="calllogout()" class="nav-link " aria-current="page" routerLinkActive="active"
+                            routerLink="/Login">logOut</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+</div>

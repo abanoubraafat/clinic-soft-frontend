@@ -1,0 +1,68 @@
+<!-- patient-list.component.html -->
+@if (loading) {
+  <div class="spinner-container text-center w-100">
+      <app-spinner></app-spinner>
+  </div>
+}
+@else{
+  <div class="alert-container">
+    <app-success *ngIf="isDeleted" [title]="'Patient'" [status]="'Deleted'"></app-success>
+  </div>
+  <app-page-title [spanText]="'All'" [headerText]="'Patients'" [image]="'allPatients.gif'"></app-page-title>
+
+<div class="container-fluid">
+  <div class="form-row">
+            
+    <div class="form-group col-md-5">
+        <label for="datePicker">Search by Name:</label>
+        <input type="text" class="form-control" placeholder="Search by Name" [(ngModel)]="searchByName" (input)="searchPatients()">
+      </div>
+    <div class="form-group col-md-5 ml-5">
+        <label for="resType">Search by National ID:</label>
+        <input type="text" class="form-control" placeholder="Search by National ID" [(ngModel)]="searchByNationalId" (input)="searchPatientsByNationalId()">
+    </div>
+</div>
+<table class="table table-striped text-center">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Condition</th>
+      <th>Blood Type</th>
+      <th>Medications</th>
+      <th>Notes</th>
+      <th>Name</th>
+      <th>National ID</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (p of displayedItems; track p.patientId){
+    <tr>
+      <td>{{ p.patientId }}</td>
+      <td>{{ p.condition }}</td>
+      <td>{{ p.bloodType}}</td>
+      <td>{{ p.medications }}</td>
+      <td>{{ p.notes }}</td>
+      <td>{{ p.fname }} {{ p.lname }}</td>
+      <td>{{ p.nationalId }}</td>
+      <td>
+        <!-- <a href="#">Update</a> | -->
+         <!-- <a routerlink="/patient/{{p.patientId}}">Details</a> -->
+        <button class="btn" [routerLink]="'/patientupdate/' +p.patientId" (mouseover)="changeColorEdit($event)" (mouseout)="returnColor($event)"><i class="fa-regular fa-pen-to-square"></i></button>|
+        <button class="btn" [routerLink]="'/patient/' + p.patientId"><i class="fa-solid fa-circle-info" (mouseover)="changeColorEdit($event)" (mouseout)="returnColor($event)"></i></button>|
+        <button class="btn" (click)="showConfirmation(p.patientId)" (mouseover)="changeColorDelete($event)" (mouseout)="returnColor($event)" title="Delete Patient"><i class="fa-solid fa-trash"></i></button>
+        <app-confirm *ngIf="showConfirmationDialog" (confirmed)="deletePatient()" (cancelled)="cancelDelete()"></app-confirm>
+
+      </td>
+    </tr>
+  }
+  </tbody>
+</table>
+</div>
+<div class="my-3 text-center">
+  <a class="btn-main btn-round-full  w-25" routerLink="/patient">Add Patient</a>
+</div>
+<div class="text-center my-3 w-100">
+  <app-pagination [items]="Patient" (pageChange)="onPageChange($event)"></app-pagination>
+</div>
+}

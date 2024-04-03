@@ -1,0 +1,44 @@
+/* styles.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 100vw; /* تم تغيير القيمة إلى 100vw */
+  margin: auto;
+}
+
+
+.section {
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.section h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table td,
+table th {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+table td:first-child,
+table th:first-child {
+  width: 40%;
+  font-weight: bold;
+}
+
+table td:last-child,
+table th:last-child {
+  text-align: right;
+}

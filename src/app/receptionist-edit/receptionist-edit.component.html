@@ -1,0 +1,95 @@
+@if (form == null || loading) {
+    <div class="spinner-container text-center w-100">
+        <app-spinner></app-spinner>
+    </div>
+}
+@else {
+    <div class="alert-container">
+        <app-success *ngIf="isSaved" [title]="'Receptionist'" [status]="'Edited'"></app-success>
+    </div>
+    <app-page-title [spanText]="'Edit A'" [headerText]="'Receptionist'"></app-page-title>
+<div class="container">
+    <form [formGroup]="form" (ngSubmit)="save()"  class="appoinment-form">
+        <div class="mb-3 col-md-6">
+            <label for="fname" class="col-form-label">First Name *</label>
+            <input id="fname" type="text" placeholder="First Name" class="form-control" formControlName="fname">
+        @if (fname.invalid && fname.touched && form.enabled) {
+            <span class="text-danger">First Name must be more than 2 characters and doesn't include numbers</span>
+        }
+        </div>
+        <img src=".\assets\Icons\clinic.gif" alt="no" class="img-fluid" width="450px" height="450px" style="float: right;">
+        <div class="mb-3 col-md-6">
+            <label for="lname" class="col-form-label">Last Name *</label>
+            <input id="lname" type="text" placeholder="Last Name" class="form-control" formControlName="lname">
+        @if (lname.invalid && lname.touched && form.enabled) {
+            <span class="text-danger">Last Name must be more than 2 characters and doesn't include numbers</span>
+        }
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="email" class="col-form-label">Email *</label>
+            <input id="email" type="email" placeholder="Email" class="form-control" formControlName="email">
+            @if (email.invalid && email.touched && form.enabled) {
+                <span class="text-danger">Required</span>
+            }
+            @else if (IsExistingEmail && form.enabled) {
+                <span class="text-danger">Email Already Exists</span>
+            }
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="pass" class="col-form-label">Password *</label>
+            <input id="pass" type="password" placeholder="Password" class="form-control" formControlName="password">
+            @if (password.invalid && password.touched && form.enabled) {
+                <span class="text-danger">Password must be more than 2 characters/numbers</span>
+            }
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="conPass" class="col-form-label">Confirm Password *</label>
+            <input id="conPass" type="password" placeholder="Confirm Password" class="form-control" formControlName="confirmPassword">
+            @if (confirmPassword.invalid && confirmPassword.touched && form.enabled) {
+                <span class="text-danger">Password must be more than 2 characters/numbers</span>
+            }
+            @else if (confirmPassword.touched && !isEqualPass && form.enabled) {
+                <span class="text-danger">Password doesn't match</span>
+            }
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="natId" class="col-form-label">National Id*</label>
+            <input id="natId" type="number" placeholder="National Id" class="form-control" formControlName="nationalId" (input)="onNationalidChange($event)">
+            @if (nationalId.invalid && nationalId.touched && form.enabled) {
+                <span class="text-danger">Invalid National Id</span>
+            }
+            @if (nationalId.touched && NationalIdExsistError && nationalId.valid) {
+                <span class="text-danger">National Id Already Exists</span>
+            }
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="workingDate" class="col-form-label">Start Working Date *</label>
+            <input id="workingDate" type="date" class="form-control" formControlName="startWorkingDate">
+            @if (startWorkingDate.invalid && startWorkingDate.touched && form.enabled) {
+                <span class="text-danger">Required</span>
+            }
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="startShTime" class="col-form-label">Shift Starts from *</label>
+            <input id="startShTime" type="time" class="form-control" formControlName="startShiftTime">
+            @if (startShiftTime.invalid && startShiftTime.touched && form.enabled) {
+                <span class="text-danger">Required</span>
+            }
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="endShTime" class="col-form-label">Shift Ends in *</label>
+            <input id="endShTime" type="time" class="form-control" formControlName="endShiftTime">
+            @if (endShiftTime.invalid && endShiftTime.touched && form.enabled) {
+                <span class="text-danger">Required</span>
+            }
+            @else if (!isValidShiftEnd && form.enabled) {
+                <span class="text-danger">End Shift time is before or same as start shift time</span>
+            }
+        </div>
+        <div class="my-5 text-center">
+            <button type="submit" class="btn-main btn-round-full w-25" [disabled]="form.invalid || !isValidShiftEnd || NationalIdExsistError || form.disabled || IsExistingEmail || !isEqualPass">Save Receptionist</button>
+        </div>
+    </form>
+</div>
+
+}

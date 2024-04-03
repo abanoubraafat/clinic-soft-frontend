@@ -1,0 +1,65 @@
+<div class="alert-container">
+    <app-success *ngIf="isSaved" [title]="'Reservation'" [status]="'Updated'"></app-success>
+  </div>
+  <app-page-title [spanText]="'Edit'" [headerText]="'Clinic Expenses'"></app-page-title>
+  <img src=".\assets\Icons\expenses.gif" alt="no" class="img-fluid mr-5" width="400px" height="400px" style="float: right;">
+
+<form (ngSubmit)="submitForm(Updateform)" [formGroup]="Updateform">
+    <div class="container">
+        <div class="col-md-6">
+            <div class="mb-3">
+                <label for="electricity" class="form-label">Electricity</label>
+                <input formControlName="Electricity" type="number" class="form-control" id="electricity"
+                    name="electricity">
+                <p class="m-1"
+                    *ngIf="Updateform.get('Electricity')?.errors?.['required']&&Updateform.get('Electricity')?.touched">
+                    it
+                    was
+                    required</p>
+            </div>
+            <div class="mb-3">
+                <label for="rent" class="form-label">Rent</label>
+                <input formControlName="Rent" type="number" class="form-control" id="rent" name="rent">
+                <p class="m-1"
+                    *ngIf="Updateform.get('Rent')?.errors?.['required']&&Updateform.get('Rent')?.touched">it
+                    was
+                    required</p>
+            </div>
+            <div class="mb-3">
+                <label for="tools" class="form-label">Tools</label>
+                <input formControlName="Tools" type="number" class="form-control" id="tools" name="tools">
+                <p class="m-1"
+                    *ngIf="Updateform.get('Tools')?.errors?.['required']&&Updateform.get('Tools')?.touched">it
+                    was
+                    required</p>
+            </div>
+            <div class="mb-3">
+                <label for="salaries" class="form-label">Salaries</label>
+                <input formControlName="Salaries" type="number" class="form-control" id="salaries" name="salaries">
+                <p class="m-1"
+                    *ngIf="Updateform.get('Salaries')?.errors?.['required']&&Updateform.get('Salaries')?.touched">it
+                    was
+                    required</p>
+            </div>
+            <div class="mb-3">
+                <label for="others" class="form-label">Others</label>
+                <input formControlName="Others" type="number" class="form-control" id="others" name="others">
+                <p class="m-1"
+                    *ngIf="Updateform.get('Others')?.errors?.['required']&&Updateform.get('Others')?.touched">
+                    it was
+                    required</p>
+            </div>
+            <div class="mb-3">
+                <label for="month" class="form-label">Month</label>
+                <input formControlName="Month" type="date" class="form-control" id="month" name="month">
+                <p class="m-1"
+                    *ngIf="Updateform.get('Month')?.errors?.['required']&&Updateform.get('Month')?.touched">it
+                    was
+                    required</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center my-5">
+        <button [disabled]="Updateform.invalid" type="submit" class="btn-main btn-round-full w-25">Submit</button>
+    </div>
+</form>

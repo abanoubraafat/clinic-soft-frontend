@@ -1,0 +1,59 @@
+<!-- patient-list.component.html -->
+@if (loading) {
+  <div class="spinner-container text-center w-100">
+      <app-spinner></app-spinner>
+  </div>
+}
+@else{
+  <div class="alert-container">
+    <app-success *ngIf="isDeleted" [title]="'Operation'" [status]="'Deleted'"></app-success>
+  </div>
+  <app-page-title [spanText]="'All'" [headerText]="'Operations'" [image]="'allOperations.gif'"></app-page-title>
+<div class="container">
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label class="w-25" for="datePicker">Filter By Day:</label>
+      <input type="date" id="datePicker" class="form-control" (change)="onDateChange($event)">
+    </div>
+  </div>
+<table class="table table table-striped text-center">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th>PatientId</th>
+      <th>PatientName</th>
+      <th>Actions</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (p of displayedItems; track p.id){
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.date }}</td>
+      <td>{{ p.type}}</td>
+      <td>{{ p.patientId }}</td>
+      <td>{{ p.patientName }}</td>
+      <td>
+        <button class="btn" (mouseover)="changeColorEdit($event)" (mouseout)="returnColor($event)"   [routerLink]="'/operationupdate/' +p.id"><i class="fa-regular fa-pen-to-square"></i></button>|
+        <!-- <button class="btn" (click)="editReservation(reservation.id)" (mouseover)="changeColorEdit($event)" (mouseout)="returnColor($event)" title="Edit Reservation"><i class="fa-regular fa-pen-to-square"></i></button> -->
+
+        <button class="btn" (click)="showConfirmation(p.id)" (mouseover)="changeColorDelete($event)" (mouseout)="returnColor($event)" title="Delete Operation"><i class="fa-solid fa-trash"></i></button>
+        <app-confirm *ngIf="showConfirmationDialog" (confirmed)="deleteOperation()" (cancelled)="cancelDelete()"></app-confirm>
+      </td>
+    </tr>
+  }
+  </tbody>
+</table>
+</div>
+<div class="my-3 text-center">
+  <a class="btn-main btn-round-full  w-25" routerLink="/operation">Add Operation</a>
+</div>
+<div class="text-center my-3 w-100">
+  <app-pagination [items]="Operation" (pageChange)="onPageChange($event)"></app-pagination>
+</div>
+}
+
+

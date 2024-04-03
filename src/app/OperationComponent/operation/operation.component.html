@@ -1,0 +1,43 @@
+<!-- add-patient.component.html -->
+<div class="alert-container">
+  <app-success *ngIf="isSaved" [title]="'Operation'" [status]="'Added'"></app-success>
+</div>
+<app-page-title [spanText]="'Book An'" [headerText]="'Operation'"></app-page-title>
+<div>
+  <img src=".\assets\Icons\surgery-room.gif" alt="no" class="img-fluid" width="310px" height="310px" style="float: right; margin-right: 100px;">
+  <div class="container">
+  <form (ngSubmit)="onSubmit(); submitted = true;" class="appoinment-form">
+      <div class="form-group mb-3 col-md-6">
+        <label for="date">Date*:</label>
+        <input type="date" id="date" class="form-control" name="date" [(ngModel)]="newOperation.Date" required>
+        <ng-container *ngIf="!newOperation.Date && submitted">
+          <p style="color: rgb(199, 44, 44);">Please Enter Date</p>
+        </ng-container>
+        <ng-container *ngIf="dateInPast()">
+          <p style="color: rgb(199, 44, 44);">Date must be in the future</p>
+      </ng-container>
+      </div>
+      <div class="form-group mb-3 col-md-6">
+        <label for="type">Type*:</label>
+        <input type="text" id="type" class="form-control" name="type" [(ngModel)]="newOperation.Type" required>
+        <ng-container *ngIf="!newOperation.Type && submitted">
+          <p style="color: rgb(199, 44, 44);">Please Enter Type</p>
+        </ng-container>
+      </div>
+      <div class="form-group mb-3 col-md-6">
+        <label for="patientId">Patient ID*:</label>
+        <input type="number" id="patientId" class="form-control" name="patientId" (change)="onPatientidChange($event)" [(ngModel)]="newOperation.PatientId" required>
+        <ng-container *ngIf="!newOperation.PatientId && submitted">
+          <p style="color: rgb(199, 44, 44);">Please Enter Patient ID</p>
+        </ng-container>
+        <ng-container *ngIf="patientIdExixtError">
+          <p style="color: rgb(199, 44, 44);"> Patient ID Not Exsist</p>
+        </ng-container>
+      </div>
+      <div class="mb-5 mt-5 text-center">
+        <button type="submit" class="btn-main btn-round-full w-25">Save</button>
+      </div>
+  </form>
+</div>
+</div>
+

@@ -1,0 +1,75 @@
+
+
+<div class="container" *ngIf="Patientdetails">
+
+  <div class="section">
+    <h3>General Information</h3>
+    <table>
+      <tr>
+        <td>National ID:</td>
+        <td>{{ Patientdetails.nationalId }}</td>
+      </tr>
+      <tr>
+        <td>Full Name:</td>
+        <td>{{ Patientdetails.fname }} {{ Patientdetails.lname }}</td>
+      </tr>
+      <tr>
+        <td>Condition:</td>
+        <td>{{ Patientdetails.condition }}</td>
+      </tr>
+      <tr>
+        <td>Blood Type:</td>
+        <td>{{ Patientdetails.bloodType }}</td>
+      </tr>
+      <tr>
+        <td>Medications:</td>
+        <td>{{ Patientdetails.medications }}</td>
+      </tr>
+      <tr>
+        <td>Notes:</td>
+        <td>{{ Patientdetails.notes }}</td>
+      </tr>
+
+    </table>
+  </div>
+
+  <div class="section">
+    <h3>Operation Information</h3>
+    <table>
+      <tr>
+        <td>Date</td>
+        <td>Type</td>
+      </tr>
+      <ng-container *ngFor="let date of Patientdetails.operationDate; let i = index">
+        <tr>
+          <td>{{ date }}</td>
+          <td>{{ Patientdetails.operationType[i] }}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+
+  <div class="section">
+    <h3>Reservation Information</h3>
+    <table>
+      <tr>
+        <th>Reservation Day</th>
+        <th>Reservation From Time</th>
+        <th>Reservation To Time</th>
+        <th>Reservation Number</th>
+      </tr>
+    </table>
+    <ng-container *ngFor="let reservationDay of Patientdetails.reservationDay;let i = index">
+      <table>
+        <tr>
+          <td>{{ reservationDay }}</td>
+          <td>{{Patientdetails.reservationFromTime[i] }}</td>
+          <td>{{ Patientdetails.reservationToTime[i] }}</td>
+          <td>{{ Patientdetails.reservationNumber[i] }}</td>
+        </tr>
+      </table>
+    </ng-container>
+  </div>
+</div>
+
+

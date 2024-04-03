@@ -1,0 +1,61 @@
+<div class="alert-container">
+    <app-success *ngIf="isSaved" [title]="'Availability'" [status]="'Added'"></app-success>
+</div>
+<div class="alert-container">
+   <app-error-pop-up *ngIf="isAlreadySet" [status]="'Dr. Already set appointement in this day'"></app-error-pop-up>
+</div>
+<app-page-title [spanText]="'Add'" [headerText]="'Dr. Availability'"></app-page-title>
+<img src=".\assets\Icons\Dr.gif" alt="no" class="img-fluid mr-5" width="400px" height="400px" style="float: right;">
+<div class="container">
+    <form (ngSubmit)="submitForm(addform)" [formGroup]="addform" class="appoinment-form">
+        <div class="mb-3 col-md-6">
+            <label for="Month" class="form-label">Date</label>
+            <input formControlName="Month" type="date" class="form-control" id="Month" name="Month">
+            <p class="m-1 text-danger"
+                *ngIf="addform.get('Month')?.errors?.['required']&&addform.get('Month')?.touched">it
+                was
+                required</p>
+        </div>
+        <!-- <div class="mb-3 col-md-6">
+                    <label for="Day" class="form-label">Day</label>
+                    <input formControlName="Day" type="date" class="form-control" id="Day" name="Day">
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Day')?.errors?.['required']&&addform.get('Day')?.touched">it
+                        was
+                        required</p>
+                </div> -->
+        <div class="mb-3 col-md-6">
+            <label for="FromTime" class="form-label">Form Time</label>
+            <input formControlName="FromTime" type="time" class="form-control" id="FromTime" name="FromTime">
+            <p class="m-1 text-danger"
+                *ngIf="addform.get('FromTime')?.errors?.['required']&&addform.get('FromTime')?.touched">it
+                was
+                required</p>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="ToTime" class="form-label">To Time</label>
+            <input (change)="ontotimecahne($event)" formControlName="ToTime" type="time" class="form-control"
+                id="ToTime" name="ToTime">
+            <p class="m-1 text-danger"
+                *ngIf="addform.get('ToTime')?.errors?.['required']&&addform.get('ToTime')?.touched">it
+                was
+                required</p>
+            <p class="m-1 text-danger" *ngIf="invaledtime">invalid time mast be in the futuer</p>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label for="DoctorId" class="form-label">Doctor Name</label>
+            <select formControlName="DoctorId" name="" id="" class="form-control">
+                <option value="">Select an item</option>
+                <option *ngFor="let doctor of Doctors" [value]="doctor.userId">{{ doctor.fname }}</option>
+            </select>
+            <p class="m-1 text-danger"
+                *ngIf="addform.get('DoctorId')?.errors?.['required']&&addform.get('DoctorId')?.touched">it
+                was
+                required</p>
+        </div>
+        <div class="text-center my-5">
+            <button [disabled]="addform.invalid || invaledtime" type="submit"
+                class="btn-main btn-round-full w-25">Submit</button>
+        </div>
+    </form>
+</div>

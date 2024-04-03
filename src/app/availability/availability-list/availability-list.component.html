@@ -1,0 +1,96 @@
+<style>
+    /* Custom CSS styles for the table */
+    .table-custom {
+        margin-bottom: 1rem;
+        font-size: 14px;
+        /* Adjust font size as needed */
+    }
+
+    .table-custom th,
+    .table-custom td {
+        padding: 12px;
+        /* Adjust padding as needed */
+    }
+
+    .table-custom thead th {
+        background-color: #007bff;
+        /* Header background color */
+        color: #fff;
+        /* Header text color */
+        vertical-align: middle;
+    }
+
+    .table-custom tbody tr:nth-child(even) {
+        background-color: #f8f9fa;
+        /* Even row background color */
+    }
+
+    .table-custom tbody tr:hover {
+        background-color: #e9ecef;
+        /* Hover row background color */
+    }
+
+    .table-custom .btn {
+        padding: 5px 10px;
+        /* Adjust button padding as needed */
+    }
+</style>
+
+
+@if (loading) {
+<div class="spinner-container text-center w-100">
+    <app-spinner></app-spinner>
+</div>
+}
+@else
+{
+<div class="alert-container">
+    <app-success *ngIf="isDeleted" [title]="'Availability'" [status]="'Deleted'"></app-success>
+</div>
+<app-page-title [spanText]="'All'" [headerText]="'Dr. Availabilities'" [image]="'AllAvilablities.gif'"></app-page-title>
+<div class="container">
+    <div class="form-group col-md-6">
+        <label class="w-25" for="datePicker">Filter:</label>
+        <input type="date" id="datePicker" class="form-control" (change)="onDateChange($event)">
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Month</th>
+                <th scope="col">Day</th>
+                <th scope="col">From</th>
+                <th scope="col">To</th>
+                <th scope="col">doctor</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of currentPageItems">
+                <td>{{item.month}}</td>
+                <td>{{item.day}}</td>
+                <td>{{item.fromTime}}</td>
+                <td>{{item.toTime}}</td>
+                <td>{{item.doctorId}}</td>
+                <td>
+                    <button (click)=" edita(item.id)" class="btn btn-warning m-1"><i
+                            class="fa-regular fa-pen-to-square"></i></button>
+                    <!-- <button class="btn btn-info">Details</button> -->
+                    <button (click)="showConfirmation(item.id)" class="btn btn-danger "><i
+                            class="fa-solid fa-trash"></i></button>
+                    <app-confirm *ngIf="showConfirmationDialog" (confirmed)="deletea()" (cancelled)="cancelDelete()">
+                    </app-confirm>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="my-3 text-center">
+        <a class="btn-main btn-round-full  w-25" routerLink="/Availability">Add Availability</a>
+    </div>
+</div>
+}
+
+@if(!loading && mylist.length != 0){
+<div class="text-center my-3 w-100">
+    <app-pagination [items]="mylist" (pageChange)="onPageChange($event)"></app-pagination>
+</div>
+}

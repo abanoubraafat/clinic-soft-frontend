@@ -1,0 +1,73 @@
+<div class="alert-container">
+  <app-success *ngIf="isSaved" [title]="'Patient'" [status]="'Edited'"></app-success>
+</div>
+<app-page-title [spanText]="'Edit A'" [headerText]="'Patient'"></app-page-title>
+<div *ngIf="patientData" class="container">
+  <form (ngSubmit)="onSubmit(); submitted = true;" class="appoinment-form">
+      <div class="form-group mb-3 col-md-6">
+        <label for="firstName">First Name*:</label>
+        <input type="text" id="firstName" class="form-control" name="firstName" [(ngModel)]="patientData.fname" required>
+        <ng-container *ngIf="submitted && (!patientData.fname || patientData.fname.length < 3)">
+            <p style="color: rgb(199, 44, 44);">Please Enter First Name with at least 3 characters</p>
+        </ng-container>
+        <ng-container *ngIf="submitted && (!patientData.fname || containsNumbers(patientData.fname))">
+          <p style="color: rgb(199, 44, 44);">Please Enter alphabetic characters only</p>
+        </ng-container>
+      </div>
+      <img src=".\assets\Icons\patient.gif" alt="no" class="img-fluid" width="400px" height="400px" style="float: right; margin-right: 100px;">
+      <div class="form-group mb-3 col-md-6">
+        <label for="lastName">Last Name*:</label>
+        <input type="text" id="lastName" class="form-control" name="lastName" [(ngModel)]="patientData.lname" required>
+        <ng-container *ngIf="submitted && (!patientData.lname || patientData.lname.length < 3)">
+          <p style="color: rgb(199, 44, 44);">Please Enter Last Name with at least 3 characters</p>
+      </ng-container>
+      <ng-container *ngIf="submitted && (!patientData.lname || containsNumbers(patientData.lname))">
+        <p style="color: rgb(199, 44, 44);">Please Enter alphabetic characters only</p>
+    </ng-container>
+      </div>
+      <div class="form-group mb-3 col-md-6">
+        <label for="nationalId">National ID*:</label>
+        <input type="number" id="nationalId" class="form-control" name="nationalId"(input)="onNationalidChange($event)"   [(ngModel)]="patientData.nationalId" required>
+        <ng-container *ngIf="submitted && (!patientData.nationalId ) ">
+          <p style="color: rgb(199, 44, 44);">Please Enter National ID</p>
+      </ng-container>
+      <ng-container *ngIf="NationalIdExsistError">
+        <p style="color: rgb(199, 44, 44);"> National ID already Exsist</p>
+      </ng-container>
+      <ng-container *ngIf="lengthError">
+        <p style="color: rgb(199, 44, 44);">National ID must be 14 digits long</p>
+      </ng-container>
+      <ng-container *ngIf="patientData.nationalId < 0">
+        <p style="color: rgb(199, 44, 44);">Please enter a positive number</p>
+    </ng-container>
+    <ng-container *ngIf="doubleError">
+      <p style="color: rgb(199, 44, 44);">Please enter an integer number</p>
+  </ng-container>
+      </div>
+      <div class="form-group mb-3 col-md-6">
+        <label for="bloodType">Blood Type:</label>
+        <input type="text" id="bloodType" class="form-control" name="bloodType" [(ngModel)]="patientData.bloodType" required>
+        <!-- <ng-container *ngIf="submitted && (!patientData.bloodType )  ">
+          <p style="color: rgb(199, 44, 44);">Please Enter Blood Type</p>
+        </ng-container>
+        <ng-container *ngIf="submitted && (!patientData.bloodType || containsNumbers(patientData.bloodType))">
+          <p style="color: rgb(199, 44, 44);">Please Enter alphabetic characters only</p>
+      </ng-container> -->
+      </div>
+      <div class="form-group mb-3 col-md-6">
+        <label for="notes">Notes:</label>
+        <textarea id="notes" name="notes" class="form-control" [(ngModel)]="patientData.notes"></textarea>
+      </div>
+      <div class="form-group mb-3 col-md-6">
+        <label for="medications">Medications:</label>
+        <textarea id="medications"  name="medications" class="form-control" [(ngModel)]="patientData.medications"></textarea>
+      </div>
+      <div class="form-group mb-3 col-md-6">
+        <label for="Condition">Condition:</label>
+        <textarea id="Condition" name="Condition" class="form-control" [(ngModel)]="patientData.condition"></textarea>
+      </div>
+      <div class="mb-5 mt-5 text-center">
+          <button type="submit" class="btn-main btn-round-full w-25">Update Patient</button>
+      </div>
+  </form>
+</div>

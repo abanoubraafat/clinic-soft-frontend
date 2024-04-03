@@ -1,0 +1,59 @@
+@if(loading)
+{
+    <div class="spinner-container text-center w-100">
+        <app-spinner></app-spinner>
+    </div>
+}
+@else {
+    <div class="alert-container">
+        <app-success *ngIf="isDeleted" [title]="'Receptionist'" [status]="'Deleted'"></app-success>
+    </div>
+    <app-page-title [spanText]="'All'" [headerText]="'Receptionists'" [image]="'AllReceptionists.gif'"></app-page-title>
+    <div class="container">
+        @if(receptionists.length == 0)
+        {
+            <h1 class="text-center my-5">No Receptionists Added yet ♥</h1>
+        }
+        @else {
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>National Id</th>
+                        <th>Start Working Date</th>
+                        <th>Start Shift Time</th>
+                        <th>End Shift Time</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (receptionist of displayedItems; track receptionist.recepId) {
+                        <tr>
+                            <td>{{receptionist.userName}}</td>
+                            <td>{{receptionist.userEmail}}</td>
+                            <td>{{receptionist.userNational_Id}}</td>
+                            <td>{{receptionist.startWorkingDate}}</td>
+                            <td>{{receptionist.startShiftTime}}</td>
+                            <td>{{receptionist.endShiftTime}}</td>
+                            <td>
+                                <button class="btn" (click)="editReceptionist(receptionist.recepId)" (mouseover)="changeColorEdit($event)" (mouseout)="returnColor($event)" title="Edit Receptionist"><i class="fa-regular fa-pen-to-square"></i></button>|
+                                <button class="btn" (click)="showConfirmation(receptionist.recepId, receptionist.userId)" (mouseover)="changeColorDelete($event)" (mouseout)="returnColor($event)" title="Delete Receptionist"><i class="fa-solid fa-trash"></i></button>
+                                <app-confirm *ngIf="showConfirmationDialog" (confirmed)="deleteReceptionist()" (cancelled)="cancelDelete()"></app-confirm>
+                               
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+}
+<div class="mb-3 text-center">
+    <a class="btn-main btn-round-full  w-25" routerLink="/receptionist">Add Receptionist</a>
+</div>
+@if(!loading && receptionists.length > 0){
+    <div class="text-center my-3 w-100">
+        <app-pagination [items]="receptionists" (pageChange)="onPageChange($event)"></app-pagination>
+    </div>
+}

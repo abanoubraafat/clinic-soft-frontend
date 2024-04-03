@@ -1,0 +1,46 @@
+.navbar-text {
+    font-size: larger;
+    color: #4e7fa0;
+    /* Soft blue color */
+    font-family: 'Poppins', sans-serif;
+    /* Modern font family */
+    text-decoration: none;
+    /* Remove underline from links */
+}
+
+.navbar-text {
+    margin: 0%;
+    padding: 0%;
+    display: block;
+    /* Display each span block element on a new line */
+}
+
+.navbar-text:hover {
+    color: #346787;
+    /* Darker blue color on hover */
+}
+
+/* .nav-div {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+} */
+
+ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.nav-link {
+    color: rgb(102, 102, 102) !important;
+    margin: 0px 15px;
+    font-weight: 500;
+    transition: .5s;
+}
+
+.nav-link:hover {
+    color: skyblue !important;
+    scale: 1.1;
+    border-bottom: 1px solid skyblue;
+}

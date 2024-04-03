@@ -1,0 +1,51 @@
+<app-page-title [spanText]="'Reservations'" [headerText]="'Income'" [image]="'profit.gif'"></app-page-title>
+
+
+<div class="container">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="monthPicker">Select Month  To show Incoming in This Month:</label>
+      <input type="month" id="monthPicker" class="form-control" [(ngModel)]="selectedDate">
+      <div class="text-center">
+        <button class="btn-main btn-round-full mt-2" (click)="getIncomeByMonth()">Get Income By Month</button>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="yearPicker">Enter Year To show Incoming in This Year:</label>
+      <input type="number" id="yearPicker" class="form-control" [(ngModel)]="selectedYear" placeholder="Year">
+      <div class="text-center">
+        <button class="btn-main btn-round-full mt-2" (click)="getIncomeByYear()">Get Income By Year</button>
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="datePicker">Select Day To show Incoming in This Day:</label>
+      <input type="date" id="datePicker" class="form-control" [(ngModel)]="selectedDate">
+      <div class="text-center">
+        <button class="btn-main btn-round-full mt-2" (click)="getIncomeByDay(selectedDate)">Get Income By Day</button>
+      </div>
+    </div>
+</div>
+
+  <table class="table table-striped text-center mt-4">
+    <thead>
+      <tr>
+        <th scope="col">Date</th>
+        <th scope="col">Income</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let p of displayedItems">
+        <tr>
+          <td>{{ showByYear ? getMonthName(p.month-1) : p.day }}</td>
+          <td>{{ p.income }}</td>
+        </tr>
+      </ng-container>
+      <tr *ngIf="reservationsIncome.length === 0">
+        <td colspan="2" class="text-center">No data available</td>
+      </tr>
+    </tbody>
+  </table>
+<div class="text-center my-3 w-100">
+    <app-pagination [items]="reservationsIncome" (pageChange)="onPageChange($event)"></app-pagination>
+</div>
+</div>

@@ -1,0 +1,115 @@
+*{
+  font-family: 'Trebuchet MS', sans-serif;
+
+}
+.spinner-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Set height to full viewport height */
+}
+.alert-container {
+    position: sticky;
+    top: 10px; /* adjust as needed */
+    z-index: 1000; /* adjust as needed */
+}
+.alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0); /* semi-transparent black */
+    z-index: 999; /* ensure it's on top of other content */
+    display: block; /* initially hidden */
+  }
+  .page-title {
+    padding: 55px 0px 60px 0px;
+    position: relative;
+    margin-bottom: 50px;
+  }
+  .page-title .block h1 {
+    color: #fff;
+  }
+  .page-title .block p {
+    color: #fff;
+  }
+  .page-title .breadcumb-nav {
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .overlay:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+    background: #223a66;
+  }
+ .container-fluid h3{
+    color:#223a66;
+
+  }
+  label{
+    color:#223a66;
+    font-weight:550;
+  }
+  .appoinment-form {
+    margin-top: 40px;
+  }
+  .appoinment-form .form-control {
+    background: #f9fdff;
+    height: 55px;
+    border-color: #95a7c9;
+  }
+  .appoinment-form textarea.form-control {
+    height: auto;
+    width: 100%;
+  }
+  .btn-main {
+    display: inline-block;
+    font-size: 14px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 0.75rem 2rem;
+    font-family: "Exo", sans-serif;
+    text-transform: uppercase;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    transition: all 0.35s ease;
+    background: #223a66;
+    color: #fff;
+    border-color: #223a66;
+    text-decoration: none; 
+  }
+  .btn-main:focus {
+    outline: 0px;
+    box-shadow: none;
+  }
+  .btn-main:hover {
+    background: #365794;
+    border-color: #365794;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none; 
+  }
+  .btn-round-full {
+    border-radius: 50px;
+  }
+  .btn-main:disabled{
+    background: #9e9e9e;
+    border-color: #969595;
+    color: #fff;
+    cursor: not-allowed;
+  }
+  /* :host ::ng-deep .custom-table th {
+    background-color: #223a66 !important; 
+    color: #fff !important; 
+    font-weight: bold; 
+  } */

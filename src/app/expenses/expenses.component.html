@@ -1,0 +1,82 @@
+
+  <div class="alert-container">
+    <app-success *ngIf="isSaved" [title]="'expenses'" [status]="'Added'"></app-success>
+  </div>
+  <app-page-title [spanText]="'Add'" [headerText]="'Clinic Expenses'"></app-page-title>
+  <img src=".\assets\Icons\expenses.gif" alt="no" class="img-fluid mr-5" width="400px" height="400px" style="float: right;">
+<div class="container">
+            <form (ngSubmit)="submitForm(addform)" [formGroup]="addform" class="appoinment-form">
+                <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="electricity" class="form-label">Electricity</label>
+                    <input formControlName="Electricity" type="number" class="form-control" id="electricity"
+                        name="electricity">
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Electricity')?.errors?.['required']&&addform.get('Electricity')?.touched">it
+                        was
+                        required</p>
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Electricity')?.errors?.['min']&&addform.get('Electricity')?.touched">mast be
+                        positve</p>
+                </div>
+                <div class="mb-3">
+                    <label for="rent" class="form-label">Rent</label>
+                    <input formControlName="Rent" type="number" class="form-control" id="rent" name="rent">
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Rent')?.errors?.['required']&&addform.get('Rent')?.touched">it
+                        was
+                        required</p>
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Rent')?.errors?.['min']&&addform.get('Rent')?.touched">mast be
+                        positve</p>
+                </div>
+                <div class="mb-3">
+                    <label for="tools" class="form-label">Tools</label>
+                    <input formControlName="Tools" type="number" class="form-control" id="tools" name="tools">
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Tools')?.errors?.['required']&&addform.get('Tools')?.touched">it
+                        was
+                        required</p>
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Tools')?.errors?.['min']&&addform.get('Tools')?.touched">mast be
+                        positve</p>
+                </div>
+                <div class="mb-3">
+                    <label for="salaries" class="form-label">Salaries</label>
+                    <input formControlName="Salaries" type="number" class="form-control" id="salaries" name="salaries">
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Salaries')?.errors?.['required']&&addform.get('Salaries')?.touched">it
+                        was
+                        required</p>
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Salaries')?.errors?.['min']&&addform.get('Salaries')?.touched">mast be
+                        positve</p>
+                </div>
+                <div class="mb-3">
+                    <label for="others" class="form-label">Others</label>
+                    <input formControlName="Others" type="number" class="form-control" id="others" name="others">
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Others')?.errors?.['required']&&addform.get('Others')?.touched">
+                        it was
+                        required</p>
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Others')?.errors?.['min']&&addform.get('Others')?.touched">mast be
+                        positve</p>
+                </div>
+                <div class="mb-3">
+                    <label for="month" class="form-label">Month</label>
+                    <input formControlName="Month" type="date" class="form-control" id="month" name="month">
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Month')?.errors?.['required']&&addform.get('Month')?.touched">it
+                        was
+                        required</p>
+                    <p class="m-1 text-danger"
+                        *ngIf="addform.get('Month')?.errors?.['min']&&addform.get('Month')?.touched">mast be
+                        positve</p>
+                </div>
+            </div>
+                <div class="text-center my-5">
+                    <button [disabled]="addform.invalid" type="submit" class="btn-main btn-round-full w-25">Submit</button>
+                </div>
+            </form>
+</div>
